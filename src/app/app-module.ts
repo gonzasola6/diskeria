@@ -3,10 +3,12 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
+import { DiskList } from './disk-list/disk-list';
 
 @NgModule({
   declarations: [
-    App
+    App,
+    DiskList
   ],
   imports: [
     BrowserModule,
