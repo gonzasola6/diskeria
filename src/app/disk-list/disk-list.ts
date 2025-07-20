@@ -12,50 +12,10 @@ import { DiskDataService } from '../disk-data';
 export class DiskList implements OnInit {
 
   disks : Disk[] = [];
-//   {
-//     name: "Artaud",
-//     year: 1973,
-//     price: 20,
-//     stock: 2,
-//     image: "assets/img/artaud.png",
-//     autor: "Pescado Rabioso",
-//     clearance: false,
-//     quantity: 0,
-//   },
-//   {
-//     name: "Clics Modernos",
-//     year: 1983,
-//     price: 18,
-//     stock: 0,
-//     image: "assets/img/clics.jpg",
-//     autor: "Charly Garcia",
-//     clearance: false,
-//     quantity: 0,
-//   },
-//   {
-//     name: "Almendra",
-//     year: 1969,
-//     price: 15,
-//     stock: 2,
-//     image: "assets/img/almendra.jpg",
-//     autor: "Almendra",
-//     clearance: true,
-//     quantity: 0,
-//   },
-//   {
-//     name: "Vida",
-//     year: 1971,
-//     price: 15,
-//     stock: 0,
-//     image: "assets/img/vida.jpg",
-//     autor: "Sui Generis",
-//     clearance: false,
-//     quantity: 0,
-//   },
-  
-// ]
 
 
+
+isLoading: boolean = true;
 
 constructor(
   private cart: DiskCartService,
@@ -64,7 +24,9 @@ constructor(
 
 ngOnInit():void {
   this.disksDataService.getAll()
-  .subscribe(disks=> this.disks = disks);
+  .subscribe(disks=> {
+  this.disks = disks;
+  this.isLoading = false;});
 }
 
 addToCart(disk:Disk):void{

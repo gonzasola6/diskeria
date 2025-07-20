@@ -1,5 +1,14 @@
-<h1>lista de discos</h1>
-<table class="table">
+<h1>Discos a la venta</h1>
+
+<!-- spinner fuera de la tabla -->
+<div *ngIf="isLoading" class="text-center mt-5">
+    <div class="spinner-border text-primary" role="status">
+        <span>Cargando listado de discos...</span>
+    </div>
+</div>
+
+<!-- tabla solo si no esta cargando -->
+<table class="table" *ngIf="!isLoading">
     <thead>
         <tr>
             <th>Imagen</th>
@@ -13,28 +22,29 @@
     </thead>
 
     <tbody>
-        @for (disk of disks; track disk.name; ){
-            <tr [class.clearance]="disk.clearance">
-                <td> <img [src]="disk.image" [alt]="disk.name" width="100"></td>
-                <td>{{disk.name}}</td>
-                <td>{{ disk.price | currency}}</td>
-                <td>{{ disk.year }}</td>
-                @if (disk.stock>0){
-                    <td>{{disk.stock}}</td>
-                } @else {
-                    <td><span class="badge text-bg-warning" *ngIf="disk.stock==0">SIN STOCK</span></td>
-                }
-                <td>
-                    <app-input-integer [(quantity)]="disk.quantity" [max]="disk.stock" *ngIf="disk.stock" (maxReached)="maxReached($event)"></app-input-integer>
-                </td>
-                <td>
-                    <button class="btn btn-primary" (click)="addToCart(disk)">Comprar</button>
-                </td>
-            </tr>
+        @for (disk of disks; track disk.name; ) {
+        <tr [class.clearance]="disk.clearance">
+            <td><img [src]="disk.image" [alt]="disk.name" width="100" /></td>
+            <td>{{ disk.name }}</td>
+            <td>{{ disk.price | currency }}</td>
+            <td>{{ disk.year }}</td>
+            @if (disk.stock > 0) {
+            <td>{{ disk.stock }}</td>
+            } @else {
+            <td><span class="badge text-bg-warning">SIN STOCK</span></td>
+            }
+            <td>
+                <app-input-integer [(quantity)]="disk.quantity" [max]="disk.stock" *ngIf="disk.stock"
+                    (maxReached)="maxReached($event)"></app-input-integer>
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="addToCart(disk)">Comprar</button>
+            </td>
+        </tr>
         } @empty {
-            <tr>
-                <td colspan="4">No hay discos para mostrar.</td>
-            </tr>
+        <tr>
+            <td colspan="7">No hay discos para mostrar.</td>
+        </tr>
         }
     </tbody>
 </table>
