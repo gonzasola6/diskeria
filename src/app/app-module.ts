@@ -1,5 +1,7 @@
 import { NgModule, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -11,6 +13,7 @@ import { BreweryDisks } from './brewery-disks/brewery-disks';
 import { Cart } from './cart/cart';
 import { InputInteger } from './input-integer/input-integer';
 import { HttpClientModule } from '@angular/common/http';
+import { DiskForm } from './disk-form/disk-form';
 
 @NgModule({
   declarations: [
@@ -19,13 +22,15 @@ import { HttpClientModule } from '@angular/common/http';
     BreweryAbout,
     BreweryDisks,
     Cart,
-    InputInteger
+    InputInteger,
+    DiskForm
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

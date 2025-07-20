@@ -26,6 +26,10 @@ export class DiskDataService {
         );
       
     }
+
+    public createDisk(disk: Disk): Observable<Disk> {
+      return this.http.post<Disk>(URL, disk);
+    }
   
   
 }
