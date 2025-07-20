@@ -7,17 +7,33 @@
             <th>Precio</th>
             <th>Año</th>
             <th>Stock</th>
+            <th>Compra</th>
         </tr>
     </thead>
+
     <tbody>
-        <tr>
-            <td>
-                <img [src]="disk.image" [alt]="disk.name" width="100">
-            </td>
-            <td>{{ disk.name }}</td>
-            <td>{{ disk.price }}</td>
-            <td>{{ disk.year }}</td>
-            <td>{{ disk.stock }}</td>
-        </tr>
+        @for (disk of disks; track disk.name; ){
+            <tr [class.clearance]="disk.clearance">
+                <td> <img [src]="disk.image" [alt]="disk.name" width="100"></td>
+                <td>{{disk.name}}</td>
+                <td>{{ disk.price | currency}}</td>
+                <td>{{ disk.year }}</td>
+                @if (disk.stock>0){
+                    <td>{{disk.stock}}</td>
+                } @else {
+                    <td><span class="badge text-bg-warning" *ngIf="disk.stock==0">SIN STOCK</span></td>
+                }
+                <td><button class="btn btn-primary btn-sm" (click)="downQuantity(disk)">-</button>
+                    {{disk.quantity}}
+                    <!-- <input 
+                        type="text"
+                        [(ngModel)]="disk.quantity"> -->
+                    <button class="btn btn-primary btn-sm"(click)="upQuantity(disk)">+</button></td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="4">No hay discos para mostrar.</td>
+            </tr>
+        }
     </tbody>
 </table>
